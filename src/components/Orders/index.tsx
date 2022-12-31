@@ -1,14 +1,23 @@
+//import { Order } from '../../types/Order';
 import { OrdersBoard } from '../OrdersBoard';
 import { Container } from './styles';
 
-
-export function Order() {
+export function Orders() {
   return (
     <>
       <Container>
-        <OrdersBoard />
-        <OrdersBoard />
-        <OrdersBoard />
+        <OrdersBoard
+          icon="⏱"
+          title="Fila de espera"
+        />
+        <OrdersBoard
+          icon="👩‍🍳"
+          title="Em preparação"
+        />
+        <OrdersBoard
+          icon="✅"
+          title="Pronto"
+        />
       </Container>
     </>
   );

@@ -26,6 +26,7 @@ export const OrdersContainer = styled.div`
   margin-top: 24px;
 
   button {
+     width: 100%;
      background: #fff;
      border: 1px solid rgba(204, 204, 204, 0.4);
      height: 128px;
