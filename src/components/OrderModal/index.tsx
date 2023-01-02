@@ -1,16 +1,26 @@
+import { useEffect } from 'react';
 import closeIcon from '../../assets/images/close-icon.svg';
 import { Order } from '../../types/Order';
 import { formatCurrency } from '../../utils/formatCurrency';
 
-import { ModalBody, OrderDetails, Overlay } from './styles';
+import { Actions, ModalBody, OrderDetails, Overlay } from './styles';
 
 interface OrderModalProps {
     visible: boolean;
     order: Order | null;
+    onClose: () => void;
 }
 
 
-export function OrderModal({ visible, order }: OrderModalProps) {
+export function OrderModal({ visible, order, onClose }: OrderModalProps) {
+  useEffect(() => {
+    document.addEventListener('keydown', (event) => {
+      if(event.key === 'Escape') {
+        onClose();
+      }
+    });
+  });
+
   if(!visible || !order) {
     return null;
   }
@@ -30,7 +40,7 @@ export function OrderModal({ visible, order }: OrderModalProps) {
       <ModalBody>
         <header>
           <strong>Mesa {order.table}</strong>
-          <button type='button'>
+          <button type='button' onClick={onClose}>
             <img src={closeIcon} />
           </button>
         </header>
@@ -76,6 +86,16 @@ export function OrderModal({ visible, order }: OrderModalProps) {
             <strong>{formatCurrency(total)}</strong>
           </div>
         </OrderDetails>
+
+        <Actions>
+          <button type='button' className="primary">
+            <span>👩‍🍳</span>
+            <strong>Iniciar preparação</strong>
+          </button>
+          <button type='button' className="secondary">
+            Cancelar Pedido
+          </button>
+        </Actions>
       </ModalBody>
     </Overlay>
   );
